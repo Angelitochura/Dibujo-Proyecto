@@ -14,3 +14,4 @@ Ahora el proyecto representa el Salar de Uyuni al atardecer. La escena está hec
 - Amanecer: tonos cálidos y ligero brillo en la sal.
 - Noche: oculta el sol, muestra la luna y estrellas, paleta oscura.
 
+link: https://angelitochura.github.io/Dibujo-Proyecto/
