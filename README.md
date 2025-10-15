@@ -1,17 +1,22 @@
+# Salar de Uyuni
 
-# Salar de Uyuni 
+Por: Miguel Angel Chura Condori 
 
-Ahora el proyecto representa el Salar de Uyuni al atardecer. La escena está hecha únicamente con HTML y CSS (sin imágenes). Incluye cielo con nubes en movimiento, sol con resplandor, cordillera lejana, la planicie blanca del salar con reflejos tipo espejo y pequeñas islas rocosas.
+Proyecto: Mi paisaje en dibujo creado en HTML y CSS  
 
-## Características principales:
-- 100% CSS/HTML, sin imágenes.
-- Animaciones con `@keyframes`: nubes en movimiento, ligero vaivén del sol y shimmer en la superficie del salar.
-- Efectos hover/focus: elevación de islas (hover/focus en `.island`) y mayor brillo en la superficie al pasar el cursor sobre la escena.
+## Proyecto
 
-## Modos disponibles:
-- Día: paleta clara y cielo azul, brillo alto en la superficie.
-- Tarde: paleta de atardecer (modo por defecto al abrir la página).
-- Amanecer: tonos cálidos y ligero brillo en la sal.
-- Noche: oculta el sol, muestra la luna y estrellas, paleta oscura.
+Inspirado en la belleza natural del Salar de Uyuni, este dibujo interactivo fue realizado utilizando únicamente HTML y CSS (con estructura modular y variables). La escena cambia entre diferentes momentos del día gracias a un control sencillo y accesible.
 
-link: https://angelitochura.github.io/Dibujo-Proyecto/
+## Características
+
+- **Animaciones:** Nubes flotantes, estrellas parpadeantes, reflejos en el salar y movimiento del cóndor.
+- **Hover:** Efectos sutiles al pasar el cursor sobre las islas o el sol.
+- **Modos de iluminación:** Cuatro escenas distintas: Día, Atardecer, Amanecer y Noche.
+- **Persistencia:** El último modo seleccionado se guarda en `localStorage`.
+- **Accesibilidad:** Botones con soporte para teclado y atributos ARIA.
+- **Responsive:** Diseñado para verse bien en móviles, tablets y escritorio.
+
+*Nota:* Los estilos están organizados en múltiples archivos CSS para mayor mantenibilidad
+
+*Link:* https://angelitochura.github.io/Dibujo-Proyecto/
