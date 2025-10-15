@@ -1,0 +1,12 @@
+/* variables / paleta */
+:root {
+  --sky-top: #ffb199;
+  --sky-mid: #ff7a90;
+  --sky-bottom: #6a9bd8;
+  --sun-core: #ffd36b;
+  --salt: #f8fbff;
+  --salt-dark: #e6eef9;
+  --mount: #3b4752;
+  --island: #c9b79b;
+  --reflect: rgba(255,255,255,0.75);
+}

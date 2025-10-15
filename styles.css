@@ -1,0 +1,207 @@
+
+/* --------------------------------------------------
+   Styles re-organizados por secciones
+   - Mantengo la funcionalidad original, solo cambio
+     el orden y añado comentarios para legibilidad
+-------------------------------------------------- */
+
+/* ==========================
+   Variables / Paleta
+   ========================== */
+:root {
+  --sky-top: #ffb199;
+  --sky-mid: #ff7a90;
+  --sky-bottom: #6a9bd8;
+  --sun-core: #ffd36b;
+  --salt: #f8fbff;
+  --salt-dark: #e6eef9;
+  --mount: #3b4752;
+  --island: #c9b79b;
+  --reflect: rgba(255,255,255,0.75);
+}
+
+
+/* ==========================
+   Reset / Base
+   ========================== */
+*{
+  box-sizing: border-box;
+}
+html,body{
+  height:100%;
+  margin:0;
+}
+body{
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,var(--sky-top),var(--sky-mid) 45%,var(--sky-bottom));
+}
+
+
+/* ==========================
+   Layout / Scene container
+   ========================== */
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
+
+/* ==========================
+   SKY, SOL, LUNA y NUBES
+   ========================== */
+.sky{position:absolute;inset:0 0 50%;pointer-events:none}
+.sun{
+  position:absolute;left:50%;top:22%;width:140px;height:140px;margin-left:-70px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #fff9e6,var(--sun-core) 40%,#ff9a66 70%);box-shadow:0 0 120px rgba(255,160,80,0.18);transform-origin:center;animation:sun-rise 12s ease-in-out infinite alternate;z-index:5}
+.sun .glow{position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,#fff3c2 0%, transparent 40%);filter:blur(18px)}
+.sun::after{content:"";position:absolute;top:50%;left:-200px;width:400px;height:24px;background:radial-gradient(ellipse at center, rgba(255,211,107,0.3) 0%, transparent 70%);transform:translateY(-50%);filter:blur(12px);opacity:0.8;z-index:-1}
+
+.cloud{position:absolute;border-radius:40px;background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));box-shadow:0 8px 18px rgba(0,0,0,0.08)}
+.cloud:before,.cloud:after{content:'';position:absolute;border-radius:50%;background:inherit}
+.cloud-a{width:260px;height:68px;left:6%;top:12%;opacity:0.95;animation:cloud-sway 60s linear infinite}
+.cloud-a:before{width:140px;height:90px;left:28px;top:-36px}
+.cloud-a:after{width:120px;height:66px;left:160px;top:-18px}
+.cloud-b{width:180px;height:56px;left:60%;top:6%;opacity:0.9;animation:cloud-sway 48s linear infinite .6s}
+.cloud-b:before{width:110px;height:70px;left:16px;top:-30px}
+.cloud-b:after{width:80px;height:46px;left:120px;top:-14px}
+.cloud-c{width:220px;height:56px;left:34%;top:18%;opacity:0.92;animation:cloud-sway 54s linear infinite .2s}
+
+.moon{position:absolute;right:12%;top:10%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff,#f1f3f6 40%, #dfe6ee 100%);box-shadow:0 0 40px rgba(220,230,255,0.06);opacity:0;transform:translateY(-6px);transition:all .6s ease}
+.moon-crater{position:absolute;border-radius:50%;background:rgba(0,0,0,0.06)}
+.moon-crater.m1{left:20%;top:30%;width:14px;height:14px}
+.moon-crater.m2{left:52%;top:46%;width:10px;height:10px}
+
+
+/* ==========================
+   ESTRELLAS
+   ========================== */
+.stars{position:absolute;left:0;right:0;top:0;height:50%;pointer-events:none;opacity:0;transition:opacity .6s ease}
+.star{position:absolute;width:4px;height:4px;background:radial-gradient(circle,#fff 0%, #ffd 60%, transparent 80%);border-radius:50%;box-shadow:0 0 8px rgba(255,255,200,0.6);transform:scale(var(--s,1));filter:drop-shadow(0 0 6px rgba(255,255,255,0.1));animation:star-twinkle 2.8s infinite ease-in-out}
+@keyframes star-twinkle{0%{opacity:.2;transform:scale(var(--s,1))}50%{opacity:1;transform:scale(calc(var(--s,1) * 1.3))}100%{opacity:.2;transform:scale(var(--s,1))}}
+
+
+/* ==========================
+   CORDILLERA / MONTAÑAS
+   ========================== */
+.back-mountains{position:absolute;left:0;right:0;bottom:42%;height:20%;pointer-events:none}
+.back-mountains .range{position:absolute;bottom:0;height:100%;width:34%;background:linear-gradient(180deg, rgba(59,71,82,0.9), rgba(59,71,82,0.7));clip-path:polygon(0 100%,8% 18%,20% 34%,36% 12%,56% 38%,72% 6%,100% 100%);transform:translateY(6px)}
+.back-mountains .r1{left:-6%;opacity:0.95}
+.back-mountains .r2{left:28%;transform:scaleX(.94) translateY(8px);opacity:.75}
+.back-mountains .r3{left:56%;transform:scaleX(.86) translateY(10px);opacity:.6}
+
+
+/* ==========================
+   SALAR (superficie reflectante)
+   ========================== */
+.salar{position:absolute;left:0;right:0;bottom:0;height:58%;background:linear-gradient(180deg,var(--salt),var(--salt-dark));display:block;overflow:hidden}
+.horizon{position:absolute;left:0;right:0;top:18%;height:4px;background:linear-gradient(90deg, transparent, rgba(0,0,0,0.04), transparent);filter:blur(.5px)}
+
+.islands{position:absolute;left:0;right:0;bottom:16%;height:50%;pointer-events:auto}
+.island{position:absolute;width:120px;height:90px;background:linear-gradient(180deg,var(--island),#bca58c);border-radius:28px 28px 8px 8px;box-shadow:0 24px 40px rgba(0,0,0,.18);transition:transform .28s ease, box-shadow .28s ease}
+.isl-1{left:22%;bottom:12%}
+.isl-2{right:18%;bottom:8%;transform:scale(.92)}
+.island:focus,.island:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 36px 56px rgba(0,0,0,.26)}
+
+.cactus{position:absolute;left:50%;bottom:28%;width:18px;height:56px;background:linear-gradient(180deg,#5aa86f,#2e7a57);transform:translateX(-50%);border-radius:8px}
+.cactus:before,.cactus:after{content:'';position:absolute;background:inherit;border-radius:8px}
+.cactus:before{left:-14px;bottom:12px;width:12px;height:30px;transform:rotate(-18deg)}
+.cactus:after{right:-14px;bottom:12px;width:12px;height:26px;transform:rotate(18deg)}
+
+
+/* ==========================
+   FAUNA: FLAMENCOS / CÓNDOR
+   ========================== */
+.flamingo{position:absolute;width:28px;height:40px;transform-origin:center;transition:transform .28s ease;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.flam-1{left:18%;bottom:36%;transform:scale(.9)}
+.flam-2{left:32%;bottom:32%;transform:scale(.78)}
+.flam-3{right:20%;bottom:34%;transform:scale(.85)}
+.flamingo:before{content:'';position:absolute;left:50%;top:6px;width:16px;height:22px;background:linear-gradient(180deg,#ff7ab6,#ff5c9a);border-radius:12px 12px 8px 8px;transform:translateX(-50%) rotate(-12deg)}
+.flamingo:after{content:'';position:absolute;left:50%;bottom:2px;width:6px;height:22px;background:#222;border-radius:4px;transform:translateX(-50%) rotate(6deg)}
+.island:hover .flamingo{transform:translateY(-6px) scale(1.02)}
+
+.condor{position:absolute;top:8%;left:-12%;width:120px;height:60px;pointer-events:none;animation:condor-flight 18s linear infinite}
+.condor .wing{position:absolute;top:10%;width:46%;height:18px;background:linear-gradient(90deg,#222,#111);border-radius:8px}
+.condor .wing-l{left:0;transform-origin:right;transform:rotate(12deg)}
+.condor .wing-r{right:0;transform-origin:left;transform:rotate(-12deg)}
+.condor .body{position:absolute;left:50%;top:28%;width:18px;height:18px;background:#111;border-radius:50%;transform:translateX(-50%)}
+
+@keyframes condor-flight{0%{transform:translateX(-18vw) translateY(0) scale(.9)}25%{transform:translateX(10vw) translateY(-40px) scale(1)}50%{transform:translateX(38vw) translateY(-12px) scale(1.02)}75%{transform:translateX(76vw) translateY(-36px) scale(.98)}100%{transform:translateX(120vw) translateY(0) scale(.9)}}
+
+
+/* ==========================
+   REFLEJOS / ESPEJO
+   ========================== */
+.reflection{position:absolute;left:0;right:0;bottom:0;height:58%;transform:scaleY(-1);overflow:hidden;pointer-events:none;opacity:.7}
+.reflection .ref-range{position:absolute;bottom:40%;height:20%;width:34%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.6));clip-path:polygon(0 100%,8% 18%,20% 34%,36% 12%,56% 38%,72% 6%,100% 100%);filter:blur(8px);opacity:.4}
+.reflection .r1{left:-6%}
+.reflection .r2{left:28%;opacity:.35}
+.reflection .r3{left:56%;opacity:.3}
+.ref-sun{position:absolute;left:50%;top:18%;width:120px;height:120px;margin-left:-60px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(255,211,107,.9));filter:blur(14px);opacity:.4}
+.ref-isl{position:absolute;width:120px;height:90px;background:linear-gradient(180deg,rgba(200,167,139,.85),rgba(188,165,140,.6));border-radius:28px;filter:blur(8px);opacity:.4}
+.ref-1{left:22%;bottom:12%}
+.ref-2{right:18%;bottom:8%;transform:scale(.92)}
+.isl-1:hover ~ .reflection .ref-1, .isl-2:hover ~ .reflection .ref-2{opacity:.65;transform:translateY(4px);transition:all .3s ease}
+
+
+/* ==========================
+   SHIMMER / SURFACE MOTION
+   ========================== */
+.salt-shimmer{position:absolute;left:-20%;top:30%;width:140%;height:40%;background:linear-gradient(90deg,rgba(255,255,255,.06) 0%, rgba(255,255,255,.18) 40%, rgba(255,255,255,.06) 60%);transform:skewX(-10deg);animation:shimmer 12s linear infinite;mix-blend-mode:overlay;pointer-events:none;opacity:.7}
+.salt-shimmer::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 50%, transparent);transform:skewX(-8deg);animation:shimmer 18s linear infinite reverse;mix-blend-mode:overlay;opacity:.6}
+.scene:hover .salt-shimmer{animation-duration:8s;opacity:.95}
+.scene:hover .salt-shimmer::after{animation-duration:12s}
+@keyframes shimmer{0%{transform:translateX(-60%) skewX(-10deg)}50%{transform:translateX(10%) skewX(-9deg)}100%{transform:translateX(140%) skewX(-10deg)}}
+
+
+/* ==========================
+   ANIMACIONES GENERALES
+   ========================== */
+@keyframes cloud-sway{0%{transform:translateX(-6%)}50%{transform:translateX(4%)}100%{transform:translateX(-6%)}}
+@keyframes sun-rise{0%{transform:translateY(0) scale(.98)}100%{transform:translateY(-6px) scale(1.02)}}
+
+
+/* ==========================
+   RESPONSIVE
+   ========================== */
+@media (max-width:800px){
+  .sun{width:96px;height:96px;margin-left:-48px}
+  .cloud-a{display:none}
+  .island{width:92px;height:66px}
+  .salt-shimmer{display:none}
+}
+
+
+/* ==========================
+   CONTROLES / ACCESIBILIDAD
+   ========================== */
+.island:focus{outline:3px dashed rgba(255,255,255,0.14);outline-offset:6px}
+.mode-controls{position:absolute;left:12px;top:12px;z-index:50;display:flex;gap:8px}
+.mode-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.14);color:#111;padding:8px 10px;border-radius:8px;cursor:pointer;backdrop-filter:blur(6px);transition:background .18s ease, transform .12s ease}
+.mode-btn[aria-pressed="true"]{background:rgba(255,255,255,0.28);transform:translateY(-2px)}
+.mode-btn:focus{outline:2px solid rgba(255,255,255,0.2);outline-offset:4px}
+
+
+/* ==========================
+   THEME VARIANTS (day/afternoon/dawn/night)
+   ========================== */
+body.theme-day{background:linear-gradient(180deg,#9fe0ff,#dff6ff 55%, #fffef5)}
+body.theme-day .sun{background:radial-gradient(circle at 35% 30%, #fff,#fff5d6 40%, #fff1b0 70%)}
+body.theme-day .cloud{background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92))}
+body.theme-day .salt-shimmer{opacity:0.85}
+
+body.theme-afternoon{background:linear-gradient(180deg,var(--sky-top),var(--sky-mid) 45%,var(--sky-bottom))}
+
+body.theme-dawn{background:linear-gradient(180deg,#ffd8b0,#ffb3a7 45%, #9ec7ff 90%)}
+body.theme-dawn .sun{background:radial-gradient(circle at 35% 30%, #fff8e6,#ffd36b 40%, #ff8c6b 75%);box-shadow:0 0 100px rgba(255,160,110,0.14)}
+body.theme-dawn .salt-shimmer{animation-duration:7s;opacity:0.9}
+
+body.theme-night{background:linear-gradient(180deg,#081226,#0b2a3f 55%, #143049)}
+body.theme-night .sun{opacity:0;transform:scale(.98)}
+body.theme-night .cloud{background:linear-gradient(180deg, rgba(200,210,225,0.04), rgba(200,210,225,0.02));box-shadow:none;opacity:0.6}
+body.theme-night .stars{opacity:1}
+body.theme-night .moon{opacity:1;transform:translateY(0)}
+body.theme-night .salt-shimmer{mix-blend-mode:screen;opacity:0.6}
+body.theme-night .back-mountains .range{opacity:0.2 !important;filter:blur(1px)}
+
+body.theme-day .salar,body.theme-afternoon .salar,body.theme-night .salar,body.theme-dawn .salar,body.theme-day .back-mountains,body.theme-afternoon .back-mountains,body.theme-night .back-mountains,body.theme-dawn .back-mountains,.sun,.cloud,.salt-shimmer,.reflection{transition:all .8s ease}

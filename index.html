@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salar de Uyuni - Atardecer</title>
+  <!-- CSS modular dividido en secciones para mantener orden -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sky.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/mountains.css">
+  <link rel="stylesheet" href="css/salar.css">
+  <link rel="stylesheet" href="css/fauna.css">
+  <link rel="stylesheet" href="css/reflection.css">
+  <link rel="stylesheet" href="css/shimmer.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/controls.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <!-- fallback: legacy single file (kept for compatibility) -->
+  <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+</head>
+<body>
+
+  <main class="scene saltflat-scene">
+
+    <div class="sky">
+      <div class="sun" aria-hidden="true" tabindex="0">
+        <div class="glow"></div>
+      </div>
+      
+      <div class="moon" aria-hidden="true">
+        <div class="moon-crater m1"></div>
+        <div class="moon-crater m2"></div>
+      </div>
+
+      <div class="stars" aria-hidden="true">
+        <div class="star" style="left:4%;top:6%;--s:0.9;animation-delay:.1s"></div>
+        <div class="star" style="left:10%;top:14%;--s:0.6;animation-delay:.3s"></div>
+        <div class="star" style="left:16%;top:8%;--s:0.7;animation-delay:.8s"></div>
+        <div class="star" style="left:22%;top:20%;--s:0.5;animation-delay:1.1s"></div>
+        <div class="star" style="left:28%;top:6%;--s:0.9;animation-delay:.6s"></div>
+        <div class="star" style="left:34%;top:12%;--s:1.0;animation-delay:0s"></div>
+        <div class="star" style="left:40%;top:4%;--s:0.55;animation-delay:1.4s"></div>
+        <div class="star" style="left:46%;top:18%;--s:0.8;animation-delay:.9s"></div>
+        <div class="star" style="left:52%;top:10%;--s:0.7;animation-delay:.2s"></div>
+        <div class="star" style="left:58%;top:6%;--s:0.95;animation-delay:.5s"></div>
+        <div class="star" style="left:64%;top:16%;--s:0.6;animation-delay:1.2s"></div>
+        <div class="star" style="left:70%;top:8%;--s:0.85;animation-delay:.4s"></div>
+        <div class="star" style="left:76%;top:20%;--s:0.6;animation-delay:1.0s"></div>
+        <div class="star" style="left:82%;top:12%;--s:0.75;animation-delay:.7s"></div>
+        <div class="star" style="left:88%;top:6%;--s:0.5;animation-delay:1.6s"></div>
+        <div class="star" style="left:94%;top:18%;--s:0.9;animation-delay:.25s"></div>
+      </div>
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div>
+    </div>
+
+    <section class="back-mountains" aria-hidden="true">
+      <div class="range r1"></div>
+      <div class="range r2"></div>
+      <div class="range r3"></div>
+    </section>
+
+    <section class="salar">
+      <div class="horizon"></div>
+      <div class="islands">
+        <div class="island isl-1" tabindex="0">
+          <div class="cactus"></div>
+          <div class="flamingo flam-1" aria-hidden="true"></div>
+          <div class="flamingo flam-2" aria-hidden="true"></div>
+        </div>
+        <div class="island isl-2" tabindex="0">
+          <div class="rocky"></div>
+          <div class="flamingo flam-3" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <div class="ref-range r1"></div>
+        <div class="ref-range r2"></div>
+        <div class="ref-range r3"></div>
+        <div class="ref-sun"></div>
+        <div class="ref-isl ref-1"></div>
+        <div class="ref-isl ref-2"></div>
+      </div>
+
+      <div class="salt-shimmer"></div>
+    </section>
+
+    <div class="condor" aria-hidden="true">
+      <div class="wing wing-l"></div>
+      <div class="wing wing-r"></div>
+      <div class="body"></div>
+    </div>
+
+    <div class="mode-controls" aria-label="Cambiar modo de iluminación">
+      <button class="mode-btn" data-mode="day" aria-pressed="false">Día</button>
+      <button class="mode-btn" data-mode="afternoon" aria-pressed="false">Atardecer</button>
+      <button class="mode-btn" data-mode="dawn" aria-pressed="false">Amanecer</button>
+      <button class="mode-btn" data-mode="night" aria-pressed="false">Noche</button>
+    </div>
+
+  </main>
+
+  <script>
+    (function(){
+      const buttons = document.querySelectorAll('.mode-btn');
+      const AUTO_KEY = 'salar_auto_mode';
+      const THEME_KEY = 'salar_theme';
+
+      function setMode(mode, save = true){
+        document.body.classList.remove('theme-day','theme-afternoon','theme-night','theme-dawn');
+        document.body.classList.add('theme-' + mode);
+        buttons.forEach(b=> b.setAttribute('aria-pressed','false'));
+        const active = document.querySelector('.mode-btn[data-mode="'+mode+'"]');
+        if(active) active.setAttribute('aria-pressed','true');
+        if(save) localStorage.setItem(THEME_KEY, mode);
+      }
+
+      let autoInterval = null;
+      function startAutoCycle(intervalMs = 50000){ 
+        stopAutoCycle();
+        let order = ['day','afternoon','dawn','night'];
+        let idx = order.indexOf(localStorage.getItem(THEME_KEY) || 'afternoon');
+        autoInterval = setInterval(()=>{
+          idx = (idx + 1) % order.length;
+          setMode(order[idx]);
+        }, intervalMs);
+        localStorage.setItem(AUTO_KEY, 'on');
+        updateAutoButtonText(true);
+      }
+      function stopAutoCycle(){ 
+        if(autoInterval) { 
+          clearInterval(autoInterval); 
+          autoInterval = null; 
+          localStorage.setItem(AUTO_KEY,'off'); 
+          updateAutoButtonText(false);
+        } 
+      }
+
+      function updateAutoButtonText(isOn){
+        const btn = document.querySelector('.auto-btn');
+        if(btn) btn.textContent = isOn ? 'Detener ciclo' : 'Auto cycle';
+      }
+
+      function setByLocalTime(){
+        const h = new Date().getHours();
+        if(h >=5 && h <=7) setMode('dawn');
+        else if(h >=8 && h <=16) setMode('day');
+        else if(h >=17 && h <=18) setMode('afternoon');
+        else setMode('night');
+      }
+
+      buttons.forEach(btn=>{
+        btn.addEventListener('click', ()=>{ stopAutoCycle(); setMode(btn.dataset.mode); });
+        btn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stopAutoCycle(); setMode(btn.dataset.mode);} });
+      });
+
+      const ctrl = document.createElement('div');
+      ctrl.className = 'extra-controls';
+      ctrl.innerHTML = '<button class="auto-btn">Detener ciclo</button> <button class="localtime-btn">Usar hora local</button>';
+      document.querySelector('.mode-controls').appendChild(ctrl);
+
+      const autoBtn = ctrl.querySelector('.auto-btn');
+      const localBtn = ctrl.querySelector('.localtime-btn');
+      autoBtn.addEventListener('click', ()=>{
+        if(localStorage.getItem(AUTO_KEY) === 'on') { stopAutoCycle(); }
+        else { startAutoCycle(50000); }
+      });
+      localBtn.addEventListener('click', ()=>{ stopAutoCycle(); setByLocalTime(); });
+
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved) setMode(saved, false);
+      else setMode('afternoon', false);
+
+      if(localStorage.getItem(AUTO_KEY) === 'on'){
+        startAutoCycle(50000);
+      } else {
+        updateAutoButtonText(false);
+      }
+    })();
+  </script>
+</body>
+</html>

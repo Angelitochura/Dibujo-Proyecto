@@ -1,0 +1,6 @@
+/* shimmer / surface motion */
+.salt-shimmer{position:absolute;left:-20%;top:30%;width:140%;height:40%;background:linear-gradient(90deg,rgba(255,255,255,.06) 0%, rgba(255,255,255,.18) 40%, rgba(255,255,255,.06) 60%);transform:skewX(-10deg);animation:shimmer 12s linear infinite;mix-blend-mode:overlay;pointer-events:none;opacity:.7}
+.salt-shimmer::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 50%, transparent);transform:skewX(-8deg);animation:shimmer 18s linear infinite reverse;mix-blend-mode:overlay;opacity:.6}
+.scene:hover .salt-shimmer{animation-duration:8s;opacity:.95}
+.scene:hover .salt-shimmer::after{animation-duration:12s}
+@keyframes shimmer{0%{transform:translateX(-60%) skewX(-10deg)}50%{transform:translateX(10%) skewX(-9deg)}100%{transform:translateX(140%) skewX(-10deg)}}

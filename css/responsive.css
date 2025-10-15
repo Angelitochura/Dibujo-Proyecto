@@ -1,0 +1,7 @@
+/* responsive */
+@media (max-width:800px){
+  .sun{width:96px;height:96px;margin-left:-48px}
+  .cloud-a{display:none}
+  .island{width:92px;height:66px}
+  .salt-shimmer{display:none}
+}

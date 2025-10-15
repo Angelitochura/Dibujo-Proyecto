@@ -1,0 +1,16 @@
+/* fauna: flamencos y condor */
+.flamingo{position:absolute;width:28px;height:40px;transform-origin:center;transition:transform .28s ease;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.flam-1{left:18%;bottom:36%;transform:scale(.9)}
+.flam-2{left:32%;bottom:32%;transform:scale(.78)}
+.flam-3{right:20%;bottom:34%;transform:scale(.85)}
+.flamingo:before{content:'';position:absolute;left:50%;top:6px;width:16px;height:22px;background:linear-gradient(180deg,#ff7ab6,#ff5c9a);border-radius:12px 12px 8px 8px;transform:translateX(-50%) rotate(-12deg)}
+.flamingo:after{content:'';position:absolute;left:50%;bottom:2px;width:6px;height:22px;background:#222;border-radius:4px;transform:translateX(-50%) rotate(6deg)}
+.island:hover .flamingo{transform:translateY(-6px) scale(1.02)}
+
+.condor{position:absolute;top:8%;left:-12%;width:120px;height:60px;pointer-events:none;animation:condor-flight 18s linear infinite}
+.condor .wing{position:absolute;top:10%;width:46%;height:18px;background:linear-gradient(90deg,#222,#111);border-radius:8px}
+.condor .wing-l{left:0;transform-origin:right;transform:rotate(12deg)}
+.condor .wing-r{right:0;transform-origin:left;transform:rotate(-12deg)}
+.condor .body{position:absolute;left:50%;top:28%;width:18px;height:18px;background:#111;border-radius:50%;transform:translateX(-50%)}
+
+@keyframes condor-flight{0%{transform:translateX(-18vw) translateY(0) scale(.9)}25%{transform:translateX(10vw) translateY(-40px) scale(1)}50%{transform:translateX(38vw) translateY(-12px) scale(1.02)}75%{transform:translateX(76vw) translateY(-36px) scale(.98)}100%{transform:translateX(120vw) translateY(0) scale(.9)}}

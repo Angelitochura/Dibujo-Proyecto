@@ -1,0 +1,3 @@
+/* animaciones generales */
+@keyframes cloud-sway{0%{transform:translateX(-6%)}50%{transform:translateX(4%)}100%{transform:translateX(-6%)}}
+@keyframes sun-rise{0%{transform:translateY(0) scale(.98)}100%{transform:translateY(-6px) scale(1.02)}}

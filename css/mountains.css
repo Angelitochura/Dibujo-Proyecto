@@ -1,0 +1,6 @@
+/* cordillera / montañas */
+.back-mountains{position:absolute;left:0;right:0;bottom:42%;height:20%;pointer-events:none}
+.back-mountains .range{position:absolute;bottom:0;height:100%;width:34%;background:linear-gradient(180deg, rgba(59,71,82,0.9), rgba(59,71,82,0.7));clip-path:polygon(0 100%,8% 18%,20% 34%,36% 12%,56% 38%,72% 6%,100% 100%);transform:translateY(6px)}
+.back-mountains .r1{left:-6%;opacity:0.95}
+.back-mountains .r2{left:28%;transform:scaleX(.94) translateY(8px);opacity:.75}
+.back-mountains .r3{left:56%;transform:scaleX(.86) translateY(10px);opacity:.6}
